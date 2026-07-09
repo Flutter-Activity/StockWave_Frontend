@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import '../providers/product_providers.dart';
 import '../providers/cart_provider.dart';
 import '../widgets/low_stock_badge.dart';
@@ -20,7 +21,12 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
     final productAsync = ref.watch(productDetailProvider(widget.productId));
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Detalle')),
+      appBar: AppBar(
+        title: const Text('Detalle'),
+        leading: context.canPop()
+            ? IconButton(icon: const Icon(Icons.arrow_back), onPressed: () => context.pop())
+            : IconButton(icon: const Icon(Icons.home), onPressed: () => context.go('/products')),
+      ),
       body: productAsync.when(
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (err, _) => Center(

@@ -12,7 +12,12 @@ class OrdersHistoryScreen extends ConsumerWidget {
     final ordersAsync = ref.watch(ordersListProvider);
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Mis pedidos')),
+      appBar: AppBar(
+        title: const Text('Mis pedidos'),
+        leading: context.canPop()
+            ? IconButton(icon: const Icon(Icons.arrow_back), onPressed: () => context.pop())
+            : IconButton(icon: const Icon(Icons.home), onPressed: () => context.go('/products')),
+      ),
       body: ordersAsync.when(
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (err, _) => Center(

@@ -48,7 +48,12 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
     final totals = PriceCalculator.calculate(cart);
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Checkout')),
+      appBar: AppBar(
+        title: const Text('Checkout'),
+        leading: context.canPop()
+            ? IconButton(icon: const Icon(Icons.arrow_back), onPressed: () => context.pop())
+            : IconButton(icon: const Icon(Icons.home), onPressed: () => context.go('/products')),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(

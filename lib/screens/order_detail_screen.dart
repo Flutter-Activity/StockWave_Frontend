@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import '../providers/order_providers.dart';
 import '../repositories/order_repository.dart';
 import '../widgets/order_status_chip.dart';
@@ -42,7 +43,12 @@ class _OrderDetailScreenState extends ConsumerState<OrderDetailScreen> {
     final orderAsync = ref.watch(orderDetailProvider(widget.orderId));
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Detalle del pedido')),
+      appBar: AppBar(
+        title: const Text('Detalle del pedido'),
+        leading: context.canPop()
+            ? IconButton(icon: const Icon(Icons.arrow_back), onPressed: () => context.pop())
+            : IconButton(icon: const Icon(Icons.home), onPressed: () => context.go('/products')),
+      ),
       body: orderAsync.when(
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (err, _) => Center(

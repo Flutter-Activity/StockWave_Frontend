@@ -13,7 +13,12 @@ class CartScreen extends ConsumerWidget {
     final totals = PriceCalculator.calculate(cart);
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Carrito')),
+      appBar: AppBar(
+        title: const Text('Carrito'),
+        leading: context.canPop()
+            ? IconButton(icon: const Icon(Icons.arrow_back), onPressed: () => context.pop())
+            : IconButton(icon: const Icon(Icons.home), onPressed: () => context.go('/products')),
+      ),
       body: cart.isEmpty
           ? const Center(child: Text('Tu carrito está vacío'))
           : Column(
