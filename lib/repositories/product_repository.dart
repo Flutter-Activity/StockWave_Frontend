@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import '../models/product.dart';
 
 class ProductRepository {
-  static const baseUrl = 'http://10.0.120.3:5000';
+  static const baseUrl = 'https://2m6ni1r2h5.execute-api.us-east-1.amazonaws.com/Prod';
 
   Future<List<Product>> getAll() async {
     final res = await http.get(Uri.parse('$baseUrl/products'));

@@ -10,7 +10,7 @@ class ApiException implements Exception {
 }
 
 class OrderRepository {
-  static const baseUrl = 'http://10.0.120.3:5000';
+  static const baseUrl = 'https://2m6ni1r2h5.execute-api.us-east-1.amazonaws.com/Prod';
 
   Future<List<Order>> getAll() async {
     final res = await http.get(Uri.parse('$baseUrl/orders'));
